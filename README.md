@@ -1,6 +1,3 @@
-Beleza! 😃 Então aqui está um **README.md** já no estilo Markdown, organizado e pronto para usar no GitHub:
-
----
 
 # 🚀 Guia Básico de Git
 
