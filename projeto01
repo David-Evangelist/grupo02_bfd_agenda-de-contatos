@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenda de Contatos</title>
+    <title>Document</title>
 </head>
 
 <body>
@@ -15,11 +15,11 @@
 
         function cadastrarContato() {
 
-            let nome = prompt("Digite seu nome completo: ")
+            let nomeContato = prompt("Digite seu nome completo: ")
             let numeroTelefone = prompt("Digite seu número de telefone com DDD:")
-            let email = prompt("Digite o seu email: ")
+            let emailContato = prompt("Digite o seu email: ")
 
-            return {nome, numeroTelefone, email}
+            return {nomeContato, numeroTelefone, emailContato}
         }
 
         function listarContatos() {
