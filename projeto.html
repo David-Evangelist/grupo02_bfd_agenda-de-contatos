@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agenda de Contatos</title>
+  </head>
+
+  <body>
+    <script>
+      let menuInterativo = Number(
+        prompt(
+          ">>>MENU<<<\n\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n\n ESCOLHA UMA OPÇÃO:"
+        )
+      );
+
+      function cadastrarContato() {
+        let nomeContato = prompt("Digite seu nome completo: ").toUpperCase();
+        let numeroTelefone = prompt("Digite seu número de telefone com DDD:");
+        let emailContato = prompt("Digite o seu email: ").toUpperCase();
+
+        return { nomeContato, numeroTelefone, emailContato };
+      }
+
+      function listarContatos() {}
+      function buscarContato() {}
+      function atualizarContato() {}
+      function removerContato() {}
+
+      switch (menuInterativo) {
+        case 1:
+          console.log(cadastrarContato());
+          break;
+        case 2:
+          break;
+        case 3:
+          break;
+        case 4:
+          break;
+        case 5:
+          break;
+        default:
+      }
+    </script>
+  </body>
+</html>
