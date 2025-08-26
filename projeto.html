@@ -9,63 +9,7 @@
 
   <body>
     <script>
-      const contatos = [];
-
-      let nomeContato = "";
-      let numeroTelefone = "";
-      let emailContato = "";
-
-      do {
-        menuInterativo = Number(
-          prompt(
-            ">>> MENU <<<\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n 0- Sair do Menu\n ESCOLHA UMA OPÇÃO:"
-          )
-        );
-
-        switch (menuInterativo) {
-          case 1:
-            cadastrarContato();
-            alert("Cadastro realizado com sucesso!");
-            break;
-          case 2:
-            console.log(listarContatos());
-            break;
-          case 3:
-            break;
-          case 4:
-            break;
-          case 5:
-            break;
-          case 0:
-            console.log("Saindo...");
-            break;
-          default:
-            console.log("Valor inválido! Tente novamente.");
-            break;
-        }
-      } while (menuInterativo !== 0);
-
-      function cadastrarContato() {
-        nomeContato = prompt("Digite seu nome completo: ").toUpperCase();
-        numeroTelefone = prompt("Digite seu número de telefone com DDD:");
-        emailContato = prompt("Digite o seu email: ").toUpperCase();
-
-        return contatos.push([nomeContato, numeroTelefone, emailContato]);
-      }
-
-      function listarContatos() {
-        for (let i = 0; i < contatos.length; i++) {
-          console.log(`>> Contato ${i + 1}`);
-          console.log(`Nome: ${contatos[i][0]}`);
-          console.log(`Telefone: ${contatos[i][1]}`);
-          console.log(`Email: ${contatos[i][2]}`);
-          console.log("--------");
-        }
-      }
-
-      function buscarContato() {}
-      function atualizarContato() {}
-      function removerContato() {}
+      
     </script>
   </body>
 </html>
