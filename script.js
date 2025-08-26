@@ -20,6 +20,7 @@ do {
       console.log(listarContatos());
       break;
     case 3:
+      buscarContato();
       break;
     case 4:
       break;
@@ -53,6 +54,22 @@ function listarContatos() {
   }
 }
 
-function buscarContato() {}
+function buscarContato() {
+  let nomeBusca = prompt("Digite o nome que deseja buscar: ");
+  let encontrado = false;
+
+  for (let i = 0; i < contatos.length; i++) {
+    if (contatos[i][0].toLowerCase() === nomeBusca.toLowerCase()) {
+      console.log(
+        `Contato encontrado no índice: ${i}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}`
+      );
+      encontrado = true;
+    }
+  }
+  if (!encontrado) {
+    console.log("Nenhum contato encontrado com esse nome!");
+  }
+}
+
 function atualizarContato() {}
 function removerContato() {}
