@@ -1,9 +1,8 @@
-      const contatos = [];
+const contatos = [];
 
 let nomeContato = "";
 let numeroTelefone = "";
 let emailContato = "";
- 
 
 do {
   menuInterativo = Number(
@@ -24,13 +23,12 @@ do {
       buscarContato();
       break;
     case 4:
-     
       break;
     case 5:
-       remover()
+      remover();
       break;
     case 0:
-      alert ('Finalizado com sucesso')
+      alert("Finalizado com sucesso");
       break;
     default:
       console.log("Valor inválido! Tente novamente.");
@@ -82,10 +80,10 @@ function buscarContato() {
 
 function atualizarContato() {}
 
-
-
 function remover() {
-  let removerContato = prompt('Digite o nome do contato para ser removido da lista:').toUpperCase();
+  let removerContato = prompt(
+    "Digite o nome do contato para ser removido da lista:"
+  ).toUpperCase();
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
@@ -93,7 +91,7 @@ function remover() {
       contatos.splice(i, 1);
       console.log(`${removerContato} foi removido da lista.`);
       encontrado = true;
-      break; 
+      break;
     }
   }
 
@@ -104,4 +102,3 @@ function remover() {
   console.log("Lista atualizada de contatos:");
   listarContatos();
 }
-      
