@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>My Web Page</title>
+    </head>
+    <body>
+            <script>
+           
+        let agenda = [
+            ["Rodrigo", "9999-9999", "rodrigo@email.com"],
+            ["Maria",   "8888-8888", "maria@email.com"],
+            ["João",    "7777-7777", "joao@email.com"],
+            ["Ana",     "6666-6666", "ana@email.com"],
+            ["Carlos",  "5555-5555", "carlos@email.com"],
+            ["Beatriz", "4444-4444", "beatriz@email.com"],
+            ["Paulo",   "3333-3333", "paulo@email.com"],
+            ["Fernanda","2222-2222", "fernanda@email.com"],
+            ["Lucas",   "1111-1111", "lucas@email.com"],
+            ["Erika",   "0000-0000", "erika@email.com"]
+        ];
+
+                function buscarContato() {
+                    let nomeBusca = prompt("Digite o nome que deseja buscar:");
+                    let encontrado = false;
+                    for (let i = 0; i < agenda.length; i++) {
+                                if (agenda[i][0].toLowerCase() === nomeBusca.toLowerCase()) {
+                            console.log(
+                                "Contato encontrado no índice:", i,
+                                "* Nome:", agenda[i][0],
+                                "* Telefone:", agenda[i][1],
+                                "* Email:", agenda[i][2]
+                            );
+                            encontrado = true;
+                        }
+                    }
+                    if (!encontrado) {
+                        console.log("Nenhum contato encontrado com esse nome!");
+                    }
+                }
+
+                buscarContato();
+
+
+            </script>
+    </body>
