@@ -17,7 +17,7 @@ do {
       alert("Cadastro realizado com sucesso!");
       break;
     case 2:
-      console.log(listarContatos());
+      listarContatos();
       break;
     case 3:
       buscarContato();
@@ -45,12 +45,18 @@ function cadastrarContato() {
 }
 
 function listarContatos() {
+  if (contatos.length === 0) {
+    console.log("Nenhum contato cadastrado!");
+  }
+
   for (let i = 0; i < contatos.length; i++) {
-    console.log(`>> Contato ${i + 1}`);
-    console.log(`Nome: ${contatos[i][0]}`);
-    console.log(`Telefone: ${contatos[i][1]}`);
-    console.log(`Email: ${contatos[i][2]}`);
-    console.log("--------");
+    if (contatos.length != null) {
+      console.log(`>> Contato ${i + 1}`);
+      console.log(`Nome: ${contatos[i][0]}`);
+      console.log(`Telefone: ${contatos[i][1]}`);
+      console.log(`Email: ${contatos[i][2]}`);
+      console.log("--------");
+    }
   }
 }
 
