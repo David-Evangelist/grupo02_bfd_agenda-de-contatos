@@ -1,30 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8"> 
+    <title>agendadecontatos</title>
 </head>
 <body>
     <script>
-            const contatos = [];
+           const contatos = [];
 
 let nomeContato = "";
-let telefoneContato = "";
+let numeroTelefone = "";
 let emailContato = "";
  
 
 do {
-    // Menu interativo
-  var menuInterativo = Number(
+  menuInterativo = Number(
     prompt(
-      "    >>> MENU <<<\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n 0- Sair do Menu\n ESCOLHA UMA OPÇÃO:"
+      ">>> MENU <<<\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n 0- Sair do Menu\n ESCOLHA UMA OPÇÃO:"
     )
   );
 
   switch (menuInterativo) {
     case 1:
       cadastrarContato();
+      alert("Cadastro realizado com sucesso!");
       break;
     case 2:
       listarContatos();
@@ -33,96 +32,112 @@ do {
       buscarContato();
       break;
     case 4:
-      atualizarContato();
+     atualizarContato();
       break;
     case 5:
-      removerContato();
+       remover()
       break;
     case 0:
-      alert ("Saindo do menu...");
+      alert ('Finalizado com sucesso')
       break;
     default:
-      alert("Valor inválido! Tente novamente.");
+      console.log("Valor inválido! Tente novamente.");
       break;
   }
 } while (menuInterativo !== 0);
 
 // <<< FUNÇÕES >>>
 function cadastrarContato() {
-  nomeContato = prompt("Digite seu nome completo: ");
-  telefoneContato = prompt("Digite seu número de telefone (XX)XXXXX-XXXX: "); //(XX)XXXXX-XXXX falta validar telefone 
-  emailContato = prompt("Digite o seu email: ");
-    if (nomeContato != null && telefoneContato != null && emailContato != null) {
-        if(emailContato.includes("@") && emailContato.includes(".com")) {
-            for(let i = 0; i < contatos.length; i++) {           
-                if(contatos.includes[i][1](telefoneContato) && contatos.includes[i][2](emailContato)) {
-                    return alert("Contato já cadastrado!");
-            }
-        }
-        alert("Cadastro realizado com sucesso!");
-        return contatos.push([nomeContato, telefoneContato, emailContato]);  
-        } else {
-            return alert("Email inválido! Tente novamente.");
-        }            
-    } else {
-        return alert("Por favor, preencha todos os campos para cadastrar o contato.");
-    }
-  
+  nomeContato = prompt("Digite seu nome completo: ").toUpperCase();
+  numeroTelefone = prompt("Digite seu número de telefone com DDD:");
+  emailContato = prompt("Digite o seu email: ").toUpperCase();
+
+  return contatos.push([nomeContato, numeroTelefone, emailContato]);
 }
 
-// Lista todos os contatos já salvos
 function listarContatos() {
   if (contatos.length === 0) {
-    alert("Nenhum contato cadastrado!");
+    console.log("Nenhum contato cadastrado!");
   }
- if (contatos.length != null) {
-  for (let i = 0; i < contatos.length; i++) {   
-      return alert(`>> Contato ${i + 1}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}\n -------`);
+
+  for (let i = 0; i < contatos.length; i++) {
+    if (contatos.length != null) {
+      console.log(`>> Contato ${i + 1}`);
+      console.log(`Nome: ${contatos[i][0]}`);
+      console.log(`Telefone: ${contatos[i][1]}`);
+      console.log(`Email: ${contatos[i][2]}`);
+      console.log("--------");
     }
   }
 }
 
-
-// Retorna o contato buscado pelo email
 function buscarContato() {
-  let emailBusca = prompt("Digite o email do contato que deseja buscar: ");
+  let nomeBusca = prompt("Digite o nome que deseja buscar: ");
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0].toLowerCase() === emailBusca.toLowerCase()) {
-      return alert(
-        `Contato encontrado no índice ${i}: \n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}`
-       );
+    if (contatos[i][0].toLowerCase() === nomeBusca.toLowerCase()) {
+      console.log(
+        `Contato encontrado no índice: ${i}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}`
+      );
+      encontrado = true;
     }
-  } 
-      return alert("Nenhum contato encontrado com esse nome!");
+  }
+  if (!encontrado) {
+    console.log("Nenhum contato encontrado com esse nome!");
+  }
 }
 
-// Atualiza um valor do contato buscado pelo email
-function atualizarContato() {
+function atualizarContato(){
+   alert("Atualize seu contato");
+    let nomeBusca= prompt("Digite o nome  do contato que queria atualizar").toUpperCase();
+    let encontrado = false
+
+    for(let i = 0 ; i <contatos.length;i++){
+    if(contatos[i][0] === nomeBusca){
+    let novoTelefone = prompt("Digite seu novo telefone:");
+    let novoEmail = prompt("Digite seu novo email:").toUpperCase();
+
+    contatos[i][1] = novoTelefone;
+    contatos[i][2] = novoEmail;
+
+    console.log("Contato atualizado com sucesso:");
+    console.log(`nome: ${contatos[i][0]}`);
+    console.log(`telefone: ${contatos[i][1]}`);
+    console.log(`email: ${contatos[i][2]}`);
+    encontrado = true;
+    break;
+    }
+  }
+
+if(!encontrado){
+  console.log(`Contato ${nomeBusca}não encontrado na lista.`);
+   }
 }
 
-// Remove o contato buscado pelo email
-function removerContato() {
-  let removerContato = prompt('Digite o email do contato para ser removido da lista: ');
+function remover() {
+  let removerContato = prompt('Digite o nome do contato para ser removido da lista:').toUpperCase();
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0].toUpperCase() === removerContato.toUpperCase()) {
+    if (contatos[i][0] === removerContato) {
       contatos.splice(i, 1);
-      alert(`${removerContato} foi removido da lista.`);
+      console.log(`${removerContato} foi removido da lista.`);
       encontrado = true;
       break; 
     }
   }
 
   if (!encontrado) {
-    alert(`Contato ${removerContato} não encontrado na lista.`);
+    console.log(`Contato ${removerContato} não encontrado na lista.`);
   }
 
-  alert("Lista atualizada de contatos:");
+  console.log("Lista atualizada de contatos:");
   listarContatos();
-}      
+}
+      
+
+
     </script>
 </body>
 </html>
