@@ -1,3 +1,47 @@
+# Agenda de Contatos
+
+> Uma agenda simples de contatos que permite cadastrar, listar, buscar, atualizar e remover contatos.
+
+## Sobre
+
+Este projeto é uma agenda de contatos básica, desenvolvida para armazenar informações de contatos em uma matriz. Permite operações essenciais de gerenciamento de contatos, como cadastro, listagem, busca, atualização e remoção.
+
+## Funcionalidades
+
+* **Cadastrar** novos contatos (nome, telefone, email)
+* **Listar** todos os contatos cadastrados
+* **Buscar** contatos por nome
+* **Atualizar** informações de um contato existente
+* **Remover** contatos da agenda
+
+## Como Funciona
+
+* O menu principal é exibido dentro de um **laço `while`**, permitindo que o usuário execute várias operações até optar por sair.
+* Cada opção do menu é tratada por um **bloco `switch/case`**, facilitando a organização das funcionalidades.
+* Os contatos são armazenados em uma **matriz**, permitindo manipulação simples dos dados.
+
+## Tecnologias
+
+* Linguagem: **JavaScript**
+* Conceitos: Arrays/matrizes, loops (`while, for`), estruturas condicionais (`switch/case, if/else`), funções
+
+## Uso
+
+1. Execute o projeto
+2. O menu será exibido com opções numeradas:
+
+   * 1: Cadastrar contato
+   * 2: Listar contatos
+   * 3: Buscar contato
+   * 4: Atualizar contato
+   * 5: Remover contato
+   * 0: Sair
+3. Escolha a opção desejada e siga as instruções na tela
+
+---
+<br/>
+<br/>
+
 
 # 🚀 Guia Básico de Git
 
