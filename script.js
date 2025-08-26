@@ -14,7 +14,7 @@ do {
   switch (menuInterativo) {
     case 1:
       cadastrarContato();
-      alert("Cadastro realizado com sucesso!");
+
       break;
     case 2:
       listarContatos();
@@ -30,7 +30,7 @@ do {
       console.log("Saindo...");
       break;
     default:
-      console.log("Valor inválido! Tente novamente.");
+      alert("Valor inválido! Tente novamente.");
       break;
   }
 } while (menuInterativo !== 0);
@@ -41,12 +41,47 @@ function cadastrarContato() {
   numeroTelefone = prompt("Digite seu número de telefone com DDD:");
   emailContato = prompt("Digite o seu email: ").toUpperCase();
 
-  return contatos.push([nomeContato, numeroTelefone, emailContato]);
+  // ARMAZENANDO AS CONDIÇÕES PARA VALIDAÇÃO
+  let camposPreenchidos =
+    nomeContato != "" && numeroTelefone != "" && emailContato != "";
+
+  let emailValido =
+    emailContato.includes("@") && emailContato.includes(".com".toUpperCase());
+
+  let telefoneValido = numeroTelefone.length === 11 && !isNaN(numeroTelefone);
+
+  // << VALIDANDO AS CONDIÇÕES >>
+  // Verifica se não há campos vazios
+  if (camposPreenchidos) {
+    // Verifica se email e telefone são válidos
+    if (emailValido && telefoneValido) {
+      // Verifica se já existe contato com mesmo telefone ou email
+      for (let i = 0; i < contatos.length; i++) {
+        if (
+          contatos[i][1].includes(numeroTelefone) ||
+          contatos[i][2].includes(emailContato)
+        ) {
+          return alert("Contato já cadastrado!");
+        }
+      }
+
+      alert("Cadastro realizado com sucesso!");
+      return contatos.push([nomeContato, numeroTelefone, emailContato]);
+    }
+
+    return alert(
+      `Algum dos campos está inválido! Verifique e preencha corretamente. ${
+        !emailValido ? `O email ${emailContato} é inválido!` : ""
+      } \n ${!telefoneValido ? `O telefone ${numeroTelefone} é inválido!` : ""}`
+    );
+  }
+
+  return alert(`Todos os campos devem ser preenchidos!`);
 }
 
 function listarContatos() {
   if (contatos.length === 0) {
-    console.log("Nenhum contato cadastrado!");
+    alert("Nenhum contato cadastrado!");
   }
 
   for (let i = 0; i < contatos.length; i++) {
