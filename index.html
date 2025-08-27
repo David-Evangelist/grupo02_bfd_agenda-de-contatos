@@ -48,26 +48,32 @@ do {
 } while (menuInterativo !== 0);
 
 // <<< FUNÇÕES >>>
+
+// Cadastra um novo contato
 function cadastrarContato() {
-  nomeContato = prompt("Digite seu nome completo: ");
-  telefoneContato = prompt("Digite seu número de telefone (XX)XXXXX-XXXX: "); //(XX)XXXXX-XXXX falta validar telefone 
-  emailContato = prompt("Digite o seu email: ");
-    if (nomeContato != null && telefoneContato != null && emailContato != null) {
-        if(emailContato.includes("@") && emailContato.includes(".com")) {
-            for(let i = 0; i < contatos.length; i++) {           
-                if(contatos.includes[i][1](telefoneContato) && contatos.includes[i][2](emailContato)) {
-                    return alert("Contato já cadastrado!");
+nomeContato = prompt("Digite seu nome completo: ");
+telefoneContato = prompt("Digite seu número de telefone com DDD: ");
+emailContato = prompt("Digite o seu email: ");
+
+if (nomeContato && telefoneContato && emailContato) {
+    if (emailContato.includes("@") && emailContato.includes(".com")) {
+      if(telefoneContato.length === 11) {
+        for (let i = 0; i < contatos.length; i++) {
+            if (contatos[i][1] === telefoneContato || contatos[i][2] === emailContato) {
+                return alert("Contato já cadastrado!");
             }
         }
-        alert("Cadastro realizado com sucesso!");
-        return contatos.push([nomeContato, telefoneContato, emailContato]);  
-        } else {
-            return alert("Email inválido! Tente novamente.");
-        }            
+        contatos.push([nomeContato, telefoneContato, emailContato]);
+        return alert("Cadastro realizado com sucesso!");
+      } else {
+        return alert("Telefone inválido! Tente novamente.");
+      }        
     } else {
-        return alert("Por favor, preencha todos os campos para cadastrar o contato.");
+        return alert("Email inválido! Tente novamente.");
     }
-  
+} else {
+    return alert("Por favor, preencha todos os campos para cadastrar o contato.");
+}
 }
 
 // Lista todos os contatos já salvos
@@ -77,7 +83,7 @@ function listarContatos() {
   }
  if (contatos.length != null) {
   for (let i = 0; i < contatos.length; i++) {   
-      return alert(`>> Contato ${i + 1}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}\n -------`);
+      alert(`>> Contato ${i + 1}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}\n -------`);
     }
   }
 }
@@ -89,7 +95,7 @@ function buscarContato() {
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0].toLowerCase() === emailBusca.toLowerCase()) {
+    if (contatos[i][2].toLowerCase() === emailBusca.toLowerCase()) {
       return alert(
         `Contato encontrado no índice ${i}: \n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}`
        );
@@ -99,7 +105,28 @@ function buscarContato() {
 }
 
 // Atualiza um valor do contato buscado pelo email
+// Falta modificações
 function atualizarContato() {
+   alert("Atualize seu contato");
+    let nomeBusca= prompt("Digite o email do contato que queria atualizar");
+    let encontrado = false
+
+    for(let i = 0 ; i <contatos.length;i++) {
+    if(contatos[i][0] === nomeBusca){
+    let novoTelefone = prompt("Digite seu novo telefone:");
+    let novoEmail = prompt("Digite seu novo email:");
+
+    contatos[i][1] = novoTelefone;
+    contatos[i][2] = novoEmail;
+
+    console.log("Contato atualizado com sucesso:");
+    console.log(`nome: ${contatos[i][0]}`);
+    console.log(`telefone: ${contatos[i][1]}`);
+    console.log(`email: ${contatos[i][2]}`);
+    encontrado = true;
+    break;
+    }
+  }
 }
 
 // Remove o contato buscado pelo email
@@ -108,7 +135,7 @@ function removerContato() {
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0].toUpperCase() === removerContato.toUpperCase()) {
+    if (contatos[i][2].toUpperCase() === removerContato.toUpperCase()) {
       contatos.splice(i, 1);
       alert(`${removerContato} foi removido da lista.`);
       encontrado = true;
@@ -117,7 +144,7 @@ function removerContato() {
   }
 
   if (!encontrado) {
-    alert(`Contato ${removerContato} não encontrado na lista.`);
+    alert(`Email do contato: ${removerContato} não encontrado na lista.`);
   }
 
   alert("Lista atualizada de contatos:");
