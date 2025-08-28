@@ -25,6 +25,7 @@ do {
     case 4:
       break;
     case 5:
+      removerContato();
       break;
     case 0:
       console.log("Saindo...");
@@ -116,4 +117,25 @@ function buscarContato() {
 }
 
 function atualizarContato() {}
-function removerContato() {}
+
+function removerContato() {
+  let contatoASerRemovido = prompt(
+    "Digite o email do contato para ser removido da lista: "
+  );
+  let encontrado = false;
+
+  for (let i = 0; i < contatos.length; i++) {
+    if (contatos[i][2].toUpperCase() === contatoASerRemovido.toUpperCase()) {
+      contatos.splice(i, 1);
+      alert(`${contatoASerRemovido} foi removido da lista.`);
+      encontrado = true;
+
+      console.log("Lista atualizada de contatos:");
+      listarContatos();
+    }
+  }
+
+  if (!encontrado) {
+    alert(`Email do contato: ${contatoASerRemovido} não encontrado na lista.`);
+  }
+}
