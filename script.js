@@ -103,7 +103,7 @@ function buscarContato() {
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0].toLowerCase() === nomeBusca.toLowerCase()) {
+    if (contatos[i][0].toLowerCase().includes(nomeBusca.toLowerCase())) {
       console.log(
         `Contato encontrado no índice: ${i}\n Nome: ${contatos[i][0]}\n Telefone: ${contatos[i][1]}\n Email: ${contatos[i][2]}`
       );
@@ -111,7 +111,7 @@ function buscarContato() {
     }
   }
   if (!encontrado) {
-    console.log("Nenhum contato encontrado com esse nome!");
+    alert("Nenhum contato encontrado com esse nome!");
   }
 }
 
