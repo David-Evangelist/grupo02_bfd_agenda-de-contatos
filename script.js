@@ -28,6 +28,7 @@ do {
       break;
     case 0:
       console.log("Saindo...");
+      alert("Saindo...");
       break;
     default:
       alert("Valor inválido! Tente novamente.");
@@ -42,8 +43,7 @@ function cadastrarContato() {
   emailContato = prompt("Digite o seu email: ").toUpperCase();
 
   // ARMAZENANDO AS CONDIÇÕES PARA VALIDAÇÃO
-  let camposPreenchidos =
-    nomeContato != "" && numeroTelefone != "" && emailContato != "";
+  let camposPreenchidos = nomeContato && numeroTelefone && emailContato;
 
   let emailValido =
     emailContato.includes("@") && emailContato.includes(".com".toUpperCase());
@@ -58,10 +58,12 @@ function cadastrarContato() {
       // Verifica se já existe contato com mesmo telefone ou email
       for (let i = 0; i < contatos.length; i++) {
         if (
-          contatos[i][1].includes(numeroTelefone) ||
-          contatos[i][2].includes(emailContato)
+          contatos[i][1] === numeroTelefone ||
+          contatos[i][2] === emailContato
         ) {
-          return alert("Contato já cadastrado!");
+          return alert(
+            `Já existe um contato cadastrado com o mesmo telefone ou email!`
+          );
         }
       }
 
@@ -70,13 +72,13 @@ function cadastrarContato() {
     }
 
     return alert(
-      `Algum dos campos está inválido! Verifique e preencha corretamente. ${
+      `Algum dos campos está inválido! Verifique e preencha corretamente.\n ${
         !emailValido ? `O email ${emailContato} é inválido!` : ""
       } \n ${!telefoneValido ? `O telefone ${numeroTelefone} é inválido!` : ""}`
     );
   }
 
-  return alert(`Todos os campos devem ser preenchidos!`);
+  return alert(`Por favor, preencha todos os campos para cadastrar o contato.`);
 }
 
 function listarContatos() {
@@ -86,10 +88,11 @@ function listarContatos() {
 
   for (let i = 0; i < contatos.length; i++) {
     if (contatos.length != null) {
-      console.log(`>> Contato ${i + 1}`);
-      console.log(`Nome: ${contatos[i][0]}`);
-      console.log(`Telefone: ${contatos[i][1]}`);
-      console.log(`Email: ${contatos[i][2]}`);
+      console.log(
+        `>> Contato ${i + 1}\n Nome: ${contatos[i][0]}\n Telefone: ${
+          contatos[i][1]
+        }\n Email: ${contatos[i][2]}`
+      );
       console.log("--------");
     }
   }
