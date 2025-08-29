@@ -23,6 +23,7 @@ do {
       buscarContato();
       break;
     case 4:
+      atualizarContato();
       break;
     case 5:
       removerContato();
@@ -84,7 +85,7 @@ function cadastrarContato() {
 
 function listarContatos() {
   if (contatos.length === 0) {
-    alert("Nenhum contato cadastrado!");
+    return alert("Nenhum contato cadastrado ainda!");
   }
 
   for (let i = 0; i < contatos.length; i++) {
@@ -100,6 +101,10 @@ function listarContatos() {
 }
 
 function buscarContato() {
+  if (contatos.length === 0) {
+    return alert("Nenhum contato cadastrado ainda!");
+  }
+
   let nomeBusca = prompt("Digite o nome que deseja buscar: ");
   let encontrado = false;
 
@@ -116,9 +121,60 @@ function buscarContato() {
   }
 }
 
-function atualizarContato() {}
+function atualizarContato() {
+  if (contatos.length === 0) {
+    return alert("Nenhum contato cadastrado ainda!");
+  }
+
+  let contatoASerAtualizado = prompt(
+    `Qual o nome do contato que deseja atualizar? `
+  ).toUpperCase();
+
+  for (let i = 0; i < contatos.length; i++) {
+    if (contatos[i][0] === contatoASerAtualizado) {
+      let campoASerAtualizado = Number(
+        prompt(
+          `Qual campo deseja atualizar?\n 1- Nome\n 2- Telefone\n 3- Email\n 0- Cancelar`
+        )
+      );
+
+      switch (campoASerAtualizado) {
+        case 1:
+          let novoNome = prompt("Digite o novo nome: ").toUpperCase();
+
+          contatos[i][0] = novoNome;
+          console.log("Contato atualizado com sucesso!\n\n");
+          listarContatos();
+          break;
+        case 2:
+          let novoTelefone = prompt("Digite o novo telefone: ");
+          contatos[i][1] = novoTelefone;
+          console.log("Contato atualizado com sucesso!\n\n");
+          listarContatos();
+          break;
+        case 3:
+          let novoEmail = prompt("Digite o novo email: ").toUpperCase();
+          contatos[i][2] = novoEmail;
+          console.log("Contato atualizado com sucesso!\n\n");
+          listarContatos();
+          break;
+        case 0:
+          alert(`Operação cancelada!`);
+          break;
+        default:
+          alert(`Opção inválida!`);
+      }
+    } else {
+      alert(`Contato não encontrado!`);
+    }
+  }
+}
 
 function removerContato() {
+  if (contatos.length === 0) {
+    return alert("Nenhum contato cadastrado ainda!");
+  }
+
   let contatoASerRemovido = prompt(
     "Digite o email do contato para ser removido da lista: "
   );
