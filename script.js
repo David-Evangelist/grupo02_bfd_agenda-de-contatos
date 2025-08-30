@@ -48,15 +48,18 @@ function cadastrarContato() {
   let camposPreenchidos = nomeContato && numeroTelefone && emailContato;
 
   let emailValido =
-    emailContato.includes("@") && emailContato.includes(".com".toUpperCase());
+    emailContato.includes("@") &&
+    emailContato.slice(-4).toUpperCase() === ".COM";
 
   let telefoneValido = numeroTelefone.length === 11 && !isNaN(numeroTelefone);
+
+  let nomeValido = isNaN(nomeContato)
 
   // << VALIDANDO AS CONDIÇÕES >>
   // Verifica se não há campos vazios
   if (camposPreenchidos) {
     // Verifica se email e telefone são válidos
-    if (emailValido && telefoneValido) {
+    if (emailValido && telefoneValido && nomeValido) {
       // Verifica se já existe contato com mesmo telefone ou email
       for (let i = 0; i < contatos.length; i++) {
         if (
