@@ -40,9 +40,16 @@ do {
 
 // <<< FUNÇÕES >>>
 function cadastrarContato() {
-  nomeContato = prompt("Digite seu nome completo: ").toUpperCase();
-  numeroTelefone = prompt("Digite seu número de telefone com DDD:");
-  emailContato = prompt("Digite o seu email: ").toUpperCase();
+  nomeContato = prompt("Digite seu nome completo: ")
+    .toUpperCase()
+    .replace(/\s+/g, " ");
+  numeroTelefone = prompt("Digite seu número de telefone com DDD:").replace(
+    /\s+/g,
+    ""
+  );
+  emailContato = prompt("Digite o seu email: ")
+    .toUpperCase()
+    .replace(/\s+/g, "");
 
   // ARMAZENANDO AS CONDIÇÕES PARA VALIDAÇÃO
   let camposPreenchidos = nomeContato && numeroTelefone && emailContato;
