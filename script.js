@@ -187,10 +187,10 @@ function atualizarContato() {
           if (validarEmail(novoEmail)) {
             contatos[i][2] = novoEmail;
             console.log("\n###  Contato atualizado com sucesso!  ###\n\n");
+            listarContatos();
           } else {
             alert(`O email ${novoEmail} é inválido!`);
           }
-          listarContatos();
           break;
         case "0":
           alert(`Operação cancelada!`);
