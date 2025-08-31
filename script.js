@@ -51,7 +51,6 @@ function cadastrarContato() {
     .replace(")", "")
     .replace("-", "");
 
-
   emailContato = prompt("Digite o seu email: ")
     .toUpperCase()
     .replace(/\s+/g, "");
