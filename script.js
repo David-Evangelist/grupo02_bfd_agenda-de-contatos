@@ -5,30 +5,28 @@ let numeroTelefone = "";
 let emailContato = "";
 
 do {
-  menuInterativo = Number(
-    prompt(
-      ">>> MENU <<<\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n 0- Sair do Menu\n ESCOLHA UMA OPÇÃO:"
-    )
+  menuInterativo = prompt(
+    ">>> MENU <<<\n 1- Cadastrar contato\n 2- Listar contatos\n 3- Buscar contato\n 4- Atualizar contato\n 5- Remover contato\n 0- Sair do Menu\n ESCOLHA UMA OPÇÃO:"
   );
 
   switch (menuInterativo) {
-    case 1:
+    case "1":
       cadastrarContato();
 
       break;
-    case 2:
+    case "2":
       listarContatos();
       break;
-    case 3:
+    case "3":
       buscarContato();
       break;
-    case 4:
+    case "4":
       atualizarContato();
       break;
-    case 5:
+    case "5":
       removerContato();
       break;
-    case 0:
+    case "0":
       console.log("Saindo...");
       alert("Saindo...");
       break;
@@ -36,31 +34,36 @@ do {
       alert("Valor inválido! Tente novamente.");
       break;
   }
-} while (menuInterativo !== 0);
+} while (menuInterativo !== null);
 
-// <<< FUNÇÕES >>>
+// ##### <<< FUNÇÕES >>> #####
+
 function cadastrarContato() {
-  nomeContato = prompt("Digite seu nome completo: ").toUpperCase();
-  numeroTelefone = prompt("Digite seu número de telefone com DDD:");
-  emailContato = prompt("Digite o seu email: ").toUpperCase();
+  nomeContato = prompt("Digite seu nome completo: ")
+    .toUpperCase()
+    .replace(/\s+/g, " ");
 
-  // ARMAZENANDO AS CONDIÇÕES PARA VALIDAÇÃO
-  let camposPreenchidos = nomeContato && numeroTelefone && emailContato;
+  numeroTelefone = prompt(
+    "Digite seu número de telefone com DDD (somente números):"
+  )
+    .replace(/\s+/g, "")
+    .replace("(", "")
+    .replace(")", "")
+    .replace("-", "");
 
-  let emailValido =
-    emailContato.includes("@") &&
-    emailContato.slice(-4).toUpperCase() === ".COM";
 
-  let telefoneValido = numeroTelefone.length === 11 && !isNaN(numeroTelefone);
-
-  let nomeValido = isNaN(nomeContato)
+  emailContato = prompt("Digite o seu email: ")
+    .toUpperCase()
+    .replace(/\s+/g, "");
 
   // << VALIDANDO AS CONDIÇÕES >>
-  // Verifica se não há campos vazios
-  if (camposPreenchidos) {
-    // Verifica se email e telefone são válidos
-    if (emailValido && telefoneValido && nomeValido) {
-      // Verifica se já existe contato com mesmo telefone ou email
+
+  if (camposPreenchidos()) {
+    if (
+      validarEmail(emailContato) &&
+      validarTelefone(numeroTelefone) &&
+      validarNome(nomeContato)
+    ) {
       for (let i = 0; i < contatos.length; i++) {
         if (
           contatos[i][1] === numeroTelefone ||
@@ -78,8 +81,12 @@ function cadastrarContato() {
 
     return alert(
       `Algum dos campos está inválido! Verifique e preencha corretamente.\n ${
-        !emailValido ? `O email ${emailContato} é inválido!` : ""
-      } \n ${!telefoneValido ? `O telefone ${numeroTelefone} é inválido!` : ""}`
+        !validarEmail(emailContato) ? `O email ${emailContato} é inválido!` : ""
+      } \n ${
+        !validarTelefone(numeroTelefone)
+          ? `O telefone ${numeroTelefone} é inválido!`
+          : ""
+      }`
     );
   }
 
@@ -130,46 +137,73 @@ function atualizarContato() {
   }
 
   let contatoASerAtualizado = prompt(
-    `Qual o nome do contato que deseja atualizar? `
+    `Qual o EMAIL do contato que deseja atualizar? `
   ).toUpperCase();
 
+  let encontrado = false;
+
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][0] === contatoASerAtualizado) {
-      let campoASerAtualizado = Number(
-        prompt(
-          `Qual campo deseja atualizar?\n 1- Nome\n 2- Telefone\n 3- Email\n 0- Cancelar`
-        )
+    if (contatos[i][2] === contatoASerAtualizado) {
+      encontrado = true;
+
+      let campoASerAtualizado = prompt(
+        `Qual campo deseja atualizar?\n 1- Nome\n 2- Telefone\n 3- Email\n 0- Cancelar`
       );
-
       switch (campoASerAtualizado) {
-        case 1:
-          let novoNome = prompt("Digite o novo nome: ").toUpperCase();
+        case "1":
+          let novoNome = prompt("Digite o novo nome: ")
+            .toUpperCase()
+            .replace(/\s+/g, " ");
 
-          contatos[i][0] = novoNome;
-          console.log("Contato atualizado com sucesso!\n\n");
+          if (validarNome(novoNome)) {
+            contatos[i][0] = novoNome;
+            console.log("\n###  Contato atualizado com sucesso!  ###\n\n");
+            listarContatos();
+          } else {
+            alert(`O nome ${novoNome} é inválido!`);
+          }
+          break;
+
+        case "2":
+          let novoTelefone = prompt("Digite o novo telefone: ")
+            .replace(/\s+/g, "")
+            .replace("(", "")
+            .replace(")", "")
+            .replace("-", "");
+
+          if (validarTelefone(novoTelefone)) {
+            contatos[i][1] = novoTelefone;
+            console.log("\n###  Contato atualizado com sucesso!  ###\n\n");
+            listarContatos();
+          } else {
+            alert(`O telefone ${novoTelefone} é inválido!`);
+          }
+          break;
+
+        case "3":
+          let novoEmail = prompt("Digite o novo email: ")
+            .toUpperCase()
+            .replace(/\s+/g, "");
+
+          if (validarEmail(novoEmail)) {
+            contatos[i][2] = novoEmail;
+            console.log("\n###  Contato atualizado com sucesso!  ###\n\n");
+          } else {
+            alert(`O email ${novoEmail} é inválido!`);
+          }
           listarContatos();
           break;
-        case 2:
-          let novoTelefone = prompt("Digite o novo telefone: ");
-          contatos[i][1] = novoTelefone;
-          console.log("Contato atualizado com sucesso!\n\n");
-          listarContatos();
-          break;
-        case 3:
-          let novoEmail = prompt("Digite o novo email: ").toUpperCase();
-          contatos[i][2] = novoEmail;
-          console.log("Contato atualizado com sucesso!\n\n");
-          listarContatos();
-          break;
-        case 0:
+        case "0":
           alert(`Operação cancelada!`);
           break;
         default:
           alert(`Opção inválida!`);
       }
-    } else {
-      alert(`Contato não encontrado!`);
     }
+  }
+
+  if (!encontrado) {
+    alert(`Contato não encontrado!`);
   }
 }
 
@@ -180,16 +214,19 @@ function removerContato() {
 
   let contatoASerRemovido = prompt(
     "Digite o email do contato para ser removido da lista: "
-  );
+  )
+    .replace(/\s+/g, "")
+    .toUpperCase();
+
   let encontrado = false;
 
   for (let i = 0; i < contatos.length; i++) {
-    if (contatos[i][2].toUpperCase() === contatoASerRemovido.toUpperCase()) {
+    if (contatos[i][2] === contatoASerRemovido) {
       contatos.splice(i, 1);
       alert(`${contatoASerRemovido} foi removido da lista.`);
       encontrado = true;
 
-      console.log("Lista atualizada de contatos:");
+      console.log("\n ### Lista atualizada de contatos: ###\n\n");
       listarContatos();
     }
   }
@@ -197,4 +234,22 @@ function removerContato() {
   if (!encontrado) {
     alert(`Email do contato: ${contatoASerRemovido} não encontrado na lista.`);
   }
+}
+
+// #### <<<< VALIDAÇÃO DOS VALORES >>>> ####
+
+function camposPreenchidos() {
+  return nomeContato && numeroTelefone && emailContato;
+}
+
+function validarEmail(email) {
+  return email && email.includes("@") && email.includes(".com".toUpperCase());
+}
+
+function validarTelefone(telefone) {
+  return telefone && telefone.length === 11 && !isNaN(telefone);
+}
+
+function validarNome(nome) {
+  return nome && isNaN(nome);
 }
