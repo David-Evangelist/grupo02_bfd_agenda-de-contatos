@@ -34,7 +34,7 @@ do {
       alert("Valor inválido! Tente novamente.");
       break;
   }
-} while (menuInterativo !== null);
+} while (menuInterativo !== "0");
 
 // ##### <<< FUNÇÕES >>> #####
 
@@ -242,7 +242,7 @@ function camposPreenchidos() {
 }
 
 function validarEmail(email) {
-  return email && email.includes("@") && email.includes(".com".toUpperCase());
+  return email && email.includes("@") && email.slice(-4) === ".COM";
 }
 
 function validarTelefone(telefone) {
